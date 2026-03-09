@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>ProKarate - Descripción del Negocio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #c40000;
+    --gold: #c9a227;
+    --sidebar-w: 165px;
+    --bg: #f5f0eb;
+    --text: #1a1a1a;
+    --muted: #555;
+    --card-bg: #fff;
+    --border: #e0d8d0;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .layout {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 16px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .kanji {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 160px;
+    line-height: 1;
+    color: rgba(255,255,255,0.12);
+    font-weight: 900;
+    letter-spacing: -10px;
+    writing-mode: vertical-rl;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .logo-wrap {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    flex-shrink: 0;
+    margin-bottom: 14px;
+  }
+
+  .logo-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 4px;
+    color: white;
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .brand-sub {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 2px;
+  }
+
+  .brand-tagline {
+    font-size: 8px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 22px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    margin-bottom: 18px;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 18px;
+    gap: 4px;
+  }
+
+  .stat { text-align: center; flex: 1; }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: white;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .stat + .stat { border-left: 1px solid rgba(255,255,255,0.2); }
+
+  /* ── MAIN ── */
+  .main {
+    flex: 1;
+    padding: 40px 44px 50px;
+    overflow-y: auto;
+  }
+
+  /* Page header */
+  .page-header {
+    margin-bottom: 36px;
+  }
+
+  .page-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 3px;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .page-header h1 span { color: var(--red); }
+
+  .page-header p {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .header-rule {
+    width: 50px;
+    height: 3px;
+    background: var(--red);
+    margin-top: 10px;
+  }
+
+  /* Cards */
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--red);
+    border-radius: 6px;
+    padding: 26px 28px;
+    animation: fadeUp 0.45s ease both;
+    transition: box-shadow 0.2s ease, border-left-color 0.2s ease;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+    border-left-color: var(--gold);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-icon-wrap {
+    width: 38px;
+    height: 38px;
+    background: #fff0f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .card h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--red);
+  }
+
+  /* Text content */
+  .card p {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .card p:last-child { margin-bottom: 0; }
+
+  /* Lists */
+  .card ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+  }
+
+  .card ul li {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    transition: color 0.15s;
+  }
+
+  .card ul li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .card:hover ul li { color: #333; }
+  .card:hover ul li::before { background: var(--gold); }
+
+  /* Single-col list override */
+  .card ul.single { grid-template-columns: 1fr; }
+
+  /* Footer */
+  footer {
+    margin-top: 44px;
+    padding-top: 18px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--text);
+  }
+
+  .footer-brand span { color: var(--red); }
+
+  footer p {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 700px) {
+    .card ul { grid-template-columns: 1fr; }
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; min-width: unset; padding: 20px; }
+    .kanji { display: none; }
+    .main { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="logo-wrap">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5OFSw4XdcwIABRPC-jQtmv3WnY3R6x7ziVA&s" alt="ProKarate Logo">
+    </div>
+    <p class="brand-name">PROKARATE</p>
+    <p class="brand-sub">Escuela de Kárate-Do</p>
+    <p class="brand-tagline">Artes Marciales &amp; Acondicionamiento Físico</p>
+    <div class="divider"></div>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Años</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100+</span>
+        <span class="stat-label">Cintas Negras</span>
+      </div>
+      
+    </div>
+    <div class="divider"></div>
+    <div class="kanji">ProK</div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <div class="page-header">
+      <h1>Perfil del <span>Negocio</span></h1>
+      <p>Ciudad de México,</p>
+      <div class="header-rule"></div>
+    </div>
+
+    <div class="cards">
+
+      <!-- Descripción -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon-wrap"></div>
+          <h2>Descripción del Negocio</h2>
+        </div>
+        <p>ProKarate es una institución especializada en la enseñanza de artes marciales y acondicionamiento físico ubicada en Ciudad de México,. Cuenta con más de 30 años de experiencia formando niños, adolescentes y adultos mediante programas de entrenamiento estructurados que desarrollan disciplina, seguridad y condición física.</p>
+        <p>La filosofía de ProKarate se basa en el Karate-Do, que significa "el camino de la mano vacía". Este arte marcial enseña a defenderse utilizando el propio cuerpo sin necesidad de armas, promoviendo el respeto, la constancia y el autocontrol.</p>
+      </div>
+
+      <!-- Servicios -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon-wrap"></div>
+          <h2>Servicios que Ofrece</h2>
+        </div>
+        <ul>
+          <li>Pre-Karate para niños de 3 a 5 años</li>
+          <li>Karate para niños de 6 a 12 años</li>
+          <li>Karate para adolescentes y adultos</li>
+          <li>Fit-Kick (Fitness Kickboxing)</li>
+          <li>Entrenamiento de Box</li>
+          <li>Danza aérea y acrobacias</li>
+          <li>Entrenamiento personal especializado</li>
+        </ul>
+      </div>
+
+      <!-- Ventajas -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon-wrap"></div>
+          <h2>Ventajas del Negocio</h2>
+        </div>
+        <ul>
+          <li>Más de 30 años de experiencia</li>
+          <li>Instructores certificados y campeones internacionales</li>
+          <li>Programas para todas las edades</li>
+          <li>Clases de prueba gratuitas</li>
+          <li>Ambiente familiar y disciplinado</li>
+        </ul>
+      </div>
+
+      <!-- Objetivo -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon-wrap"></div>
+          <h2>Objetivo del Negocio</h2>
+        </div>
+        <p>El objetivo principal de ProKarate es formar personas responsables, disciplinadas y seguras de sí mismas. A través de las artes marciales y el entrenamiento físico, se busca desarrollar tanto el cuerpo como la mente de los alumnos, ayudándolos a mejorar su calidad de vida y alcanzar sus metas personales.</p>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+</body>
+</html>
